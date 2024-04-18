@@ -1,0 +1,60 @@
+% Facts/Predicates
+bird(bluebird).
+bird(goldfinch).
+bird(canary).
+bird(spotted_thrush).
+bird(peregrine_falcon).
+
+color(bluebird, blue_and_white).
+color(goldfinch, yellow).
+color(canary, yellow).
+color(spotted_thrush, brown_and_spotted).
+color(peregrine_falcon, gray).
+
+size(bluebird, small).
+size(goldfinch, small).
+size(canary, small).
+size(spotted_thrush, medium).
+size(peregrine_falcon, large).
+
+migratory(bluebird, no).
+migratory(goldfinch, yes).
+migratory(canary, no).
+migratory(spotted_thrush, yes).
+migratory(peregrine_falcon, yes).
+
+habitat(bluebird, gardens).
+habitat(goldfinch, meadows).
+habitat(canary, cages).
+habitat(spotted_thrush, forests).
+habitat(peregrine_falcon, cliffs).
+
+% Questions for the expert system
+question(1, "What is the primary color of the bird?").
+question(2, "How would you describe the size of the bird?").
+question(3, "Does the bird exhibit migratory behavior?").
+question(4, "What is the usual habitat for the bird?").
+question(5, "Can you provide a description of the bird's typical song?").
+
+% Rule for bird identification
+identify_bird(Bird) :-
+    bird(Bird),
+    ask_question(1, Color),
+    ask_question(2, Size),
+    ask_question(3, Migratory),
+    ask_question(4, Habitat),
+    color(Bird, Color),
+    size(Bird, Size),
+    migratory(Bird, Migratory),
+    habitat(Bird, Habitat).
+
+% Helper predicate for asking questions
+ask_question(QuestionNumber, Answer) :-
+    question(QuestionNumber, Q),
+    write(Q), nl,
+    read(Answer).
+
+% Example usage:
+% To identify a bird based on features, use the following query:
+% ?- identify_bird(Bird).
+
